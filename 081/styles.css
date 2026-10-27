@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600;700&family=Prompt:wght@300;400;500;600&display=swap');
+
+:root {
+  --font-serif: 'Noto Serif Thai', serif;
+  --font-sans: 'Prompt', sans-serif;
+  --color-bg: #FAF7F2;
+  --color-card: #FFFFFF;
+  --color-primary: #2C4A3E;       /* Forest Pine Green */
+  --color-primary-light: #3D6655; /* Sage Green */
+  --color-wood: #7D4F33;          /* Warm Wood */
+  --color-wood-light: #9E6B47;
+  --color-cream: #F3ECE1;
+  --color-accent: #C28B47;        /* Warm Gold/Caramel */
+  --color-text: #2D2723;
+  --color-muted: #706861;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+.font-serif-vintage {
+  font-family: var(--font-serif);
+}
+
+/* Vintage Paper / Subtle Texture & Borders */
+.vintage-card {
+  background: var(--color-card);
+  border: 1px solid rgba(125, 79, 51, 0.15);
+  box-shadow: 0 4px 15px rgba(44, 74, 62, 0.05);
+  transition: all 0.25s ease;
+}
+
+.vintage-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(44, 74, 62, 0.1);
+  border-color: rgba(61, 102, 85, 0.35);
+}
+
+.vintage-border {
+  border: 1px solid rgba(125, 79, 51, 0.2);
+}
+
+.vintage-badge {
+  background-color: rgba(44, 74, 62, 0.08);
+  color: var(--color-primary);
+  border: 1px solid rgba(44, 74, 62, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F3ECE1;
+}
+::-webkit-scrollbar-thumb {
+  background: #B8A99A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7D4F33;
+}
+
+/* Modal and Drawer transitions */
+.modal-backdrop {
+  backdrop-filter: blur(4px);
+  background: rgba(30, 24, 20, 0.6);
+}
+
+/* Radio & Checkbox vintage styling */
+.custom-radio:checked + label {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+}
+
+.custom-checkbox:checked + label {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+}
+
+/* Pulse animation for Live status */
+@keyframes pulse-dot {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.pulse-open {
+  animation: pulse-dot 2s infinite ease-in-out;
+}

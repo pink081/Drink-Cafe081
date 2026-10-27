@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ร่มรื่นคาเฟ่ (Romruen Cafe) | วินเทจคาเฟ่ในสวนธรรมชาติ</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Noto Serif Thai & Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#FAF7F2] text-[#2D2723] antialiased selection:bg-[#3D6655] selection:text-white">
+
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#E8E0D5] transition-all">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      
+      <!-- Logo & Name -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 rounded-full bg-[#2C4A3E] text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6 text-[#EBF2EE]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 0 1-9-9c0-4.97 4.03-9 9-9 4.14 0 7.63 2.8 8.67 6.66A9.006 9.006 0 0 1 12 21z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8l4-4"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l5-5"></path>
+          </svg>
+        </div>
+        <div>
+          <span class="block text-2xl font-bold font-serif-vintage tracking-wide text-[#2C4A3E]">ร่มรื่นคาเฟ่</span>
+          <span class="block text-xs uppercase tracking-widest text-[#7D4F33] font-medium">Romruen Cafe • Vintage & Brew</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-[#544A42]">
+        <a href="#hero" class="hover:text-[#2C4A3E] transition-colors">หน้าแรก</a>
+        <a href="#menu" class="hover:text-[#2C4A3E] transition-colors">เมนู & สั่งเครื่องดื่ม</a>
+        <a href="#atmosphere" class="hover:text-[#2C4A3E] transition-colors">บรรยากาศร้าน</a>
+        <a href="#info" class="hover:text-[#2C4A3E] transition-colors">เวลาเปิด-ปิด & พิกัด</a>
+      </div>
+
+      <!-- Order Tray Button in Navbar -->
+      <div class="flex items-center gap-3">
+        <button 
+          id="nav-cart-btn" 
+          onclick="document.getElementById('floating-cart-btn').click()"
+          class="relative p-2.5 rounded-xl bg-white border border-[#DDD3C4] text-[#2C4A3E] hover:bg-[#F3ECE1] transition-all flex items-center gap-2 shadow-sm cursor-pointer"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+          <span class="hidden sm:inline text-xs font-semibold">ถาดรายการ</span>
+          <span id="cart-badge-count" class="w-5 h-5 rounded-full bg-[#7D4F33] text-white text-xs font-bold flex items-center justify-center">0</span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="hero" class="relative overflow-hidden pt-8 pb-16 lg:py-24 border-b border-[#EAE2D7]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Text Column -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Live Store Status Badge -->
+          <div id="store-status-badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-300">
+            <span id="store-status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-600 pulse-open"></span>
+            <span id="store-status-detail">กำลังตรวจสอบสถานะร้าน...</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-serif-vintage text-[#2C4A3E] leading-[1.2]">
+            จิบกาแฟใต้ร่มไม้ <br>
+            <span class="text-[#7D4F33] font-normal italic">สัมผัสความอบอุ่นสไตล์วินเทจ</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-stone-600 max-w-xl leading-relaxed">
+            ยินดีต้อนรับสู่ <strong>ร่มรื่นคาเฟ่</strong> พื้นที่พักผ่อนสบายๆ ท่ามกลางสวนเขียวขจี ลิ้มรสกาแฟคั่วหอมกรุ่น 
+            มัทฉะลาเต้แท้เข้มข้น และครัวซองต์เนยสดฝรั่งเศสอบใหม่ทุกเช้า
+          </p>
+
+          <!-- Quick Action Buttons -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#menu" class="px-6 py-3.5 rounded-xl bg-[#2C4A3E] hover:bg-[#3D6655] text-white font-medium text-sm sm:text-base shadow-md hover:shadow-lg transition-all flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              <span>ดูเมนู & เลือกเครื่องดื่ม</span>
+            </a>
+            <a href="#atmosphere" class="px-6 py-3.5 rounded-xl bg-white hover:bg-stone-50 text-[#7D4F33] border border-[#DDD3C4] font-medium text-sm sm:text-base shadow-sm transition-all flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <span>ชมบรรยากาศร้าน</span>
+            </a>
+          </div>
+
+          <!-- Highlight Highlights Mini Row -->
+          <div class="grid grid-cols-3 gap-3 pt-4 border-t border-[#EAE2D7]/80 text-xs sm:text-sm text-stone-600">
+            <div class="flex items-center gap-2">
+              <span class="text-[#2C4A3E] text-lg">🌿</span>
+              <span>สวนร่มรื่นมีที่จอดรถ</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[#2C4A3E] text-lg">☕</span>
+              <span>เมล็ดกาแฟคัดพิเศษ</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[#2C4A3E] text-lg">🥐</span>
+              <span>เบเกอรี่เนยแท้ อบสด</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Hero Photo Frame Column -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-sm sm:max-w-md">
+            
+            <!-- Vintage Paper Border Effect -->
+            <div class="absolute -inset-3 bg-[#E8DFD3] rounded-3xl -rotate-2 -z-10 shadow-sm border border-[#DACFBF]"></div>
+            
+            <div class="rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white">
+              <img 
+                src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" 
+                alt="ร่มรื่นคาเฟ่ บรรยากาศอบอุ่น"
+                class="w-full h-80 sm:h-96 object-cover"
+              />
+              <div class="p-4 bg-white flex items-center justify-between border-t border-stone-100">
+                <div>
+                  <h2 class="font-serif-vintage text-base font-bold text-[#2C4A3E]">มุมโปรดใต้ร่มเงาไม้</h2>
+                  <p class="text-xs text-stone-500">จิบกาแฟฟังเสียงลมและธรรมชาติ</p>
+                </div>
+                <span class="px-2.5 py-1 rounded-md bg-[#FAF7F2] text-xs font-semibold text-[#7D4F33] border border-[#E8DFD3]">
+                  08:00 - 17:00
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Menu Section -->
+  <section id="menu" class="py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6">
+    
+    <!-- Section Title -->
+    <div class="text-center max-w-2xl mx-auto mb-10 space-y-2">
+      <span class="text-xs uppercase tracking-widest font-semibold text-[#7D4F33] bg-[#F3ECE1] px-3 py-1 rounded-full border border-[#DDD3C4]">
+        เมนูเครื่องดื่ม & เบเกอรี่
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-bold font-serif-vintage text-[#2C4A3E]">
+        เลือกเมนูโปรด & คำนวณราคา
+      </h2>
+      <p class="text-stone-600 text-sm sm:text-base">
+        คลิกที่เมนูเพื่อเลือกระดับความหวาน ชนิดนม หรือเพิ่มท็อปปิ้ง ระบบจะคำนวณราคาให้ทันที
+      </p>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+      <button data-category="all" class="category-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-[#2C4A3E] text-white shadow-md cursor-pointer">
+        ทั้งหมด (All)
+      </button>
+      <button data-category="coffee" class="category-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 cursor-pointer">
+        ☕ กาแฟ (Coffee)
+      </button>
+      <button data-category="tea" class="category-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 cursor-pointer">
+        🍵 ชา & นม (Tea & Milk)
+      </button>
+      <button data-category="refreshing" class="category-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 cursor-pointer">
+        🍊 สดชื่นซิกเนเจอร์ (Refreshing)
+      </button>
+      <button data-category="bakery" class="category-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 cursor-pointer">
+        🥐 เบเกอรี่โฮมเมด (Bakery)
+      </button>
+    </div>
+
+    <!-- Menu Cards Grid -->
+    <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- Generated dynamically by app.js -->
+    </div>
+
+  </section>
+
+  <!-- Atmosphere & Vibes Gallery -->
+  <section id="atmosphere" class="py-16 sm:py-20 bg-[#F3ECE1]/60 border-t border-b border-[#E8DFD3]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12 space-y-2">
+        <span class="text-xs uppercase tracking-widest font-semibold text-[#7D4F33] bg-[#FAF7F2] px-3 py-1 rounded-full border border-[#DDD3C4]">
+          บรรยากาศร้าน
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-bold font-serif-vintage text-[#2C4A3E]">
+          สัมผัสความร่มรื่นและอบอุ่น
+        </h2>
+        <p class="text-stone-600 text-sm sm:text-base">
+          มุมพักผ่อนที่ออกแบบให้คุณได้ผ่อนคลายกับธรรมชาติและเสน่ห์ของงานไม้คลาสสิก
+        </p>
+      </div>
+
+      <!-- Photo Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        
+        <div class="vintage-card rounded-2xl overflow-hidden group">
+          <div class="relative h-64 overflow-hidden">
+            <img 
+              src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80" 
+              alt="ที่นั่งในสวน" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
+              <span class="text-white text-sm font-semibold font-serif-vintage">โซนสวนร่มรื่นใต้ร่มเงา</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="vintage-card rounded-2xl overflow-hidden group">
+          <div class="relative h-64 overflow-hidden">
+            <img 
+              src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80" 
+              alt="เคาน์เตอร์บาร์ไม้" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
+              <span class="text-white text-sm font-semibold font-serif-vintage">เคาน์เตอร์บาร์ไม้คลาสสิก</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="vintage-card rounded-2xl overflow-hidden group">
+          <div class="relative h-64 overflow-hidden">
+            <img 
+              src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80" 
+              alt="มุมอ่านหนังสือ" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
+              <span class="text-white text-sm font-semibold font-serif-vintage">มุมอ่านหนังสือ & ทำงาน</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="vintage-card rounded-2xl overflow-hidden group">
+          <div class="relative h-64 overflow-hidden">
+            <img 
+              src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" 
+              alt="ตู้เบเกอรี่โฮมเมด" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
+              <span class="text-white text-sm font-semibold font-serif-vintage">เบเกอรี่เนยสดอบใหม่ทุกวัน</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Store Info & Hours Section -->
+  <section id="info" class="py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Hours Card -->
+      <div class="lg:col-span-5 vintage-card p-6 sm:p-8 rounded-3xl border border-[#DDD3C4] space-y-6">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-semibold text-[#7D4F33]">Opening Hours</span>
+          <h3 class="text-2xl font-bold font-serif-vintage text-[#2C4A3E] mt-1">เวลาเปิด - ปิดร้าน</h3>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-stone-200">
+            <span class="text-stone-700 font-medium">วันจันทร์</span>
+            <span class="font-bold text-[#2C4A3E]">08:00 - 17:00 น.</span>
+          </div>
+          <div class="flex items-center justify-between pb-3 border-b border-stone-200 bg-red-50 -mx-3 px-3 py-2 rounded-xl">
+            <span class="text-red-700 font-semibold flex items-center gap-1.5">
+              <span>วันอังคาร</span>
+              <span class="text-xs bg-red-200 text-red-800 px-2 py-0.5 rounded-full font-bold">หยุดประจำสัปดาห์</span>
+            </span>
+            <span class="font-bold text-red-600">ปิดทำการ</span>
+          </div>
+          <div class="flex items-center justify-between pb-3 border-b border-stone-200">
+            <span class="text-stone-700 font-medium">วันพุธ</span>
+            <span class="font-bold text-[#2C4A3E]">08:00 - 17:00 น.</span>
+          </div>
+          <div class="flex items-center justify-between pb-3 border-b border-stone-200">
+            <span class="text-stone-700 font-medium">วันพฤหัสบดี</span>
+            <span class="font-bold text-[#2C4A3E]">08:00 - 17:00 น.</span>
+          </div>
+          <div class="flex items-center justify-between pb-3 border-b border-stone-200">
+            <span class="text-stone-700 font-medium">วันศุกร์</span>
+            <span class="font-bold text-[#2C4A3E]">08:00 - 17:00 น.</span>
+          </div>
+          <div class="flex items-center justify-between pb-3 border-b border-stone-200">
+            <span class="text-stone-700 font-medium">วันเสาร์ - อาทิตย์</span>
+            <span class="font-bold text-[#2C4A3E]">08:00 - 17:00 น.</span>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-[#F3ECE1] border border-[#DDD3C4] text-xs text-stone-600 space-y-1">
+          <p class="font-bold text-[#7D4F33]">🌿 หมายเหตุการบริการ:</p>
+          <p>• ครัวซองต์และเบเกอรี่อบสดใหม่รอบเช้า 08:30 น.</p>
+          <p>• รับออเดอร์เครื่องดื่มแก้วสุดท้ายเวลา 16:45 น.</p>
+        </div>
+      </div>
+
+      <!-- Map & Contact Info -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Location details -->
+        <div class="vintage-card p-6 sm:p-8 rounded-3xl border border-[#DDD3C4] space-y-6">
+          <div>
+            <span class="text-xs uppercase tracking-widest font-semibold text-[#7D4F33]">Location & Contact</span>
+            <h3 class="text-2xl font-bold font-serif-vintage text-[#2C4A3E] mt-1">ที่ตั้งและการติดต่อ</h3>
+            <p class="text-sm text-stone-600 mt-2">
+              ตั้งอยู่ท่ามกลางสวนร่มรื่น เดินทางสะดวก บรรยากาศเงียบสงบ มีที่จอดรถรองรับทั้งรถยนต์และจักรยานยนต์
+            </p>
+          </div>
+
+          <!-- Contact items grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <a href="tel:0891234567" class="p-4 rounded-2xl bg-white border border-stone-200 hover:border-[#2C4A3E] transition-all flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-[#EBF2EE] text-[#2C4A3E] flex items-center justify-center font-bold">
+                📞
+              </div>
+              <div>
+                <span class="text-xs text-stone-400 block">เบอร์โทรศัพท์</span>
+                <span class="text-sm font-bold text-stone-800">089-123-4567</span>
+              </div>
+            </a>
+
+            <a href="https://line.me" target="_blank" class="p-4 rounded-2xl bg-white border border-stone-200 hover:border-emerald-500 transition-all flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                💬
+              </div>
+              <div>
+                <span class="text-xs text-stone-400 block">LINE Official</span>
+                <span class="text-sm font-bold text-stone-800">@romruen.cafe</span>
+              </div>
+            </a>
+
+            <a href="#" class="p-4 rounded-2xl bg-white border border-stone-200 hover:border-rose-400 transition-all flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center font-bold">
+                📷
+              </div>
+              <div>
+                <span class="text-xs text-stone-400 block">Instagram</span>
+                <span class="text-sm font-bold text-stone-800">romruen.cafe</span>
+              </div>
+            </a>
+
+            <a href="#" class="p-4 rounded-2xl bg-white border border-stone-200 hover:border-blue-500 transition-all flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+                📘
+              </div>
+              <div>
+                <span class="text-xs text-stone-400 block">Facebook</span>
+                <span class="text-sm font-bold text-stone-800">ร่มรื่นคาเฟ่ - Romruen Cafe</span>
+              </div>
+            </a>
+
+          </div>
+
+          <!-- Mock Map Container -->
+          <div class="rounded-2xl overflow-hidden border border-stone-200 relative h-48 bg-stone-100 flex items-center justify-center">
+            <div class="text-center p-6 space-y-2">
+              <div class="w-12 h-12 rounded-full bg-[#2C4A3E] text-white flex items-center justify-center mx-auto shadow-md">
+                📍
+              </div>
+              <h4 class="font-bold text-[#2C4A3E] text-sm">ร่มรื่นคาเฟ่ (Romruen Cafe)</h4>
+              <p class="text-xs text-stone-500">ซอยร่มรื่น ถนนต้นไม้ใหญ่ เขตธรรมชาติ กรุงเทพฯ</p>
+              <a 
+                href="https://maps.google.com" 
+                target="_blank" 
+                class="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#7D4F33] hover:bg-[#9E6B47] text-white rounded-lg text-xs font-semibold shadow-sm transition-all"
+              >
+                <span>เปิดแผนที่ Google Maps นำทาง</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#233B32] text-[#DCE6E1] py-12 border-t border-[#1C3028]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div>
+        <h4 class="font-serif-vintage text-xl font-bold text-white tracking-wide">ร่มรื่นคาเฟ่</h4>
+        <p class="text-xs text-stone-300 mt-1">จิบกาแฟใต้ร่มไม้ สัมผัสความอบอุ่นสไตล์วินเทจ</p>
+        <p class="text-xs text-stone-400 mt-0.5">เปิดบริการ 08:00 - 17:00 น. (หยุดทุกวันอังคาร)</p>
+      </div>
+      <div class="text-xs text-stone-400">
+        © 2026 Romruen Cafe. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Customization Modal -->
+  <div id="customize-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl border border-stone-200 flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Modal Header with Image -->
+      <div class="relative h-44 sm:h-52 overflow-hidden bg-stone-100 flex-shrink-0">
+        <img id="modal-item-img" src="" alt="" class="w-full h-full object-cover">
+        <button id="modal-close-btn" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-stone-700 flex items-center justify-center shadow-md cursor-pointer transition-all">
+          ✕
+        </button>
+        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-4 text-white">
+          <div class="flex items-baseline justify-between">
+            <h3 id="modal-item-name" class="text-xl font-bold font-serif-vintage"></h3>
+            <span id="modal-item-base-price" class="text-lg font-bold text-amber-300"></span>
+          </div>
+          <span id="modal-item-name-en" class="text-xs text-stone-300 uppercase tracking-wider block"></span>
+        </div>
+      </div>
+
+      <!-- Modal Body (Scrollable options) -->
+      <div class="p-5 overflow-y-auto space-y-6 flex-1">
+        <p id="modal-item-desc" class="text-xs text-stone-500 leading-relaxed"></p>
+
+        <!-- Drink Options -->
+        <div id="drink-options-section" class="space-y-5">
+          
+          <!-- Drink Type: Hot / Iced / Frappe -->
+          <div>
+            <label class="block text-xs font-bold text-[#2C4A3E] uppercase tracking-wider mb-2">ประเภทเครื่องดื่ม</label>
+            <div class="grid grid-cols-3 gap-2">
+              <label class="cursor-pointer">
+                <input type="radio" name="drinkType" value="เย็น (Iced)" data-price="0" checked class="sr-only peer custom-radio">
+                <div class="py-2 text-center rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white transition-all">
+                  🧊 เย็น (ปกติ)
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="drinkType" value="ร้อน (Hot)" data-price="0" class="sr-only peer custom-radio">
+                <div class="py-2 text-center rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white transition-all">
+                  ☕ ร้อน
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="drinkType" value="ปั่น (Frappe)" data-price="10" class="sr-only peer custom-radio">
+                <div class="py-2 text-center rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white transition-all">
+                  🥤 ปั่น (+฿10)
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Sweetness Level -->
+          <div id="sweetness-section">
+            <label class="block text-xs font-bold text-[#2C4A3E] uppercase tracking-wider mb-2">ระดับความหวาน</label>
+            <div class="grid grid-cols-4 gap-2">
+              <label class="cursor-pointer">
+                <input type="radio" name="sweetness" value="0%" class="sr-only peer custom-radio">
+                <div class="py-2 text-center rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white transition-all">
+                  0% ไม่หวาน
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="sweetness" value="25%" class="sr-only peer custom-radio">
+                <div class="py-2 text-center rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white transition-all">
+                  25% หวานน้อย
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="sweetness" value="50%" checked class="sr-only peer custom-radio">
+                <div class="py-2 text-center rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white transition-all">
+                  50% หวานพอดี
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="sweetness" value="100%" class="sr-only peer custom-radio">
+                <div class="py-2 text-center rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white transition-all">
+                  100% ปกติ
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Roast Level (Coffee only) -->
+          <div id="roast-section">
+            <label class="block text-xs font-bold text-[#2C4A3E] uppercase tracking-wider mb-2">ระดับการคั่วกาแฟ</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="cursor-pointer">
+                <input type="radio" name="roast" value="คั่วกลาง-เข้ม (Medium-Dark)" checked class="sr-only peer custom-radio">
+                <div class="py-2 px-3 rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white text-center transition-all">
+                  คั่วกลาง-เข้ม (หอมเข้ม ดื่มง่าย)
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="roast" value="คั่วกลาง (Medium Roast)" class="sr-only peer custom-radio">
+                <div class="py-2 px-3 rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white text-center transition-all">
+                  คั่วกลาง (บาลานซ์ ติดฟรุตตี้ปลาย)
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Milk Options -->
+          <div id="milk-section">
+            <label class="block text-xs font-bold text-[#2C4A3E] uppercase tracking-wider mb-2">ประเภทนม (Milk Choice)</label>
+            <div id="milk-options-container" class="space-y-2">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Toppings -->
+          <div id="topping-section">
+            <label class="block text-xs font-bold text-[#2C4A3E] uppercase tracking-wider mb-2">เพิ่มท็อปปิ้ง (Toppings)</label>
+            <div id="topping-options-container" class="space-y-2">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bakery Options -->
+        <div id="bakery-options-section" class="hidden space-y-5">
+          <div>
+            <label class="block text-xs font-bold text-[#2C4A3E] uppercase tracking-wider mb-2">ความร้อนในการเสิร์ฟ</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="cursor-pointer">
+                <input type="radio" name="warmOption" value="อุ่นร้อนพร้อมทาน" checked class="sr-only peer custom-radio">
+                <div class="py-2.5 text-center rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white transition-all">
+                  ♨️ อุ่นร้อนพร้อมทาน
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="warmOption" value="ไม่อุ่นร้อน (นำกลับบ้าน)" class="sr-only peer custom-radio">
+                <div class="py-2.5 text-center rounded-xl border border-stone-200 text-xs font-medium peer-checked:bg-[#2C4A3E] peer-checked:text-white peer-checked:border-[#2C4A3E] bg-white transition-all">
+                  📦 ไม่อุ่นร้อน
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-[#2C4A3E] uppercase tracking-wider mb-2">ท็อปปิ้งเสริมสำหรับเบเกอรี่</label>
+            <div id="bakery-addons-container" class="space-y-2">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer (Qty, Real-time Total, Add Button) -->
+      <div class="p-4 bg-stone-50 border-t border-stone-200 flex items-center justify-between gap-4 flex-shrink-0">
+        <!-- Quantity -->
+        <div class="flex items-center border border-stone-300 rounded-xl bg-white px-2 py-1 shadow-sm">
+          <button onclick="adjustModalQty(-1)" class="w-7 h-7 flex items-center justify-center font-bold text-stone-600 hover:text-black active:scale-95 cursor-pointer">−</button>
+          <span id="modal-qty" class="w-8 text-center font-bold text-stone-800 text-sm">1</span>
+          <button onclick="adjustModalQty(1)" class="w-7 h-7 flex items-center justify-center font-bold text-stone-600 hover:text-black active:scale-95 cursor-pointer">+</button>
+        </div>
+
+        <!-- Add to cart button -->
+        <button 
+          onclick="confirmAddToCart()" 
+          class="flex-1 py-3 px-4 bg-[#2C4A3E] hover:bg-[#3D6655] text-white rounded-xl font-medium text-sm shadow-md flex items-center justify-between cursor-pointer active:scale-98 transition-all"
+        >
+          <span>ใส่ลงในถาด</span>
+          <span id="modal-total-price" class="font-bold text-base">฿0</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Cart / Order Tray Drawer -->
+  <div id="cart-backdrop" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden transition-opacity"></div>
+  
+  <div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out border-l border-stone-200">
+    
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-stone-200 flex items-center justify-between bg-[#FAF7F2]">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-xl bg-[#2C4A3E] text-white flex items-center justify-center">
+          🛍️
+        </div>
+        <div>
+          <h3 class="font-bold font-serif-vintage text-[#2C4A3E] text-lg">ถาดรายการที่เลือก</h3>
+          <p class="text-xs text-stone-500">สรุปเมนูและคำนวณราคาทั้งหมด</p>
+        </div>
+      </div>
+      <button id="close-cart-btn" class="w-8 h-8 rounded-full bg-white hover:bg-stone-100 border border-stone-200 text-stone-600 flex items-center justify-center cursor-pointer">
+        ✕
+      </button>
+    </div>
+
+    <!-- Drawer Content (Items List) -->
+    <div class="p-5 flex-1 overflow-y-auto">
+      
+      <!-- Empty State -->
+      <div id="cart-empty-view" class="text-center py-16 space-y-3">
+        <div class="text-4xl text-stone-300">☕</div>
+        <h4 class="font-bold text-stone-700 text-base">ยังไม่มีรายการในถาด</h4>
+        <p class="text-xs text-stone-400 max-w-xs mx-auto">
+          เลือกเครื่องดื่มหรือเบเกอรี่ที่คุณชื่นชอบ และปรับแต่งตามใจได้เลยครับ
+        </p>
+      </div>
+
+      <!-- Item List Container -->
+      <div id="cart-items-list" class="space-y-3 hidden">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- Drawer Summary & Action Buttons -->
+    <div id="cart-summary-section" class="p-5 border-t border-stone-200 bg-[#FAF7F2] space-y-4 hidden">
+      <div class="flex items-baseline justify-between">
+        <span class="text-sm font-medium text-stone-600">ยอดรวมสุทธิ</span>
+        <span id="cart-grand-total" class="text-2xl font-bold font-serif-vintage text-[#2C4A3E]">฿0</span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2">
+        <button 
+          onclick="copyOrderToClipboard()" 
+          class="py-2.5 px-3 rounded-xl bg-white border border-[#DDD3C4] text-[#7D4F33] hover:bg-stone-50 font-medium text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+          <span>คัดลอกรายการ</span>
+        </button>
+
+        <button 
+          onclick="sendOrderToLine()" 
+          class="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+        >
+          <span>💬 ส่งรายการเข้า LINE</span>
+        </button>
+      </div>
+
+      <button 
+        onclick="clearCart()" 
+        class="w-full text-center text-xs text-stone-400 hover:text-red-500 pt-1 cursor-pointer transition-colors"
+      >
+        ล้างถาดรายการทั้งหมด
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Floating Cart Button -->
+  <button 
+    id="floating-cart-btn" 
+    class="fixed bottom-6 right-6 z-40 scale-0 transform transition-transform duration-300 bg-[#2C4A3E] hover:bg-[#3D6655] text-white p-4 rounded-2xl shadow-2xl flex items-center gap-3 cursor-pointer group active:scale-95"
+  >
+    <div class="relative">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+      </svg>
+      <span id="floating-cart-count" class="absolute -top-2 -right-2 bg-[#7D4F33] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+    </div>
+    <div class="text-left pr-1">
+      <span class="block text-[10px] uppercase tracking-wider text-stone-300">ถาดเครื่องดื่ม</span>
+      <span id="floating-cart-total" class="block text-sm font-bold leading-tight">฿0</span>
+    </div>
+  </button>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 opacity-0 pointer-events-none translate-y-4 transition-all duration-300 bg-stone-900/95 text-white px-5 py-2.5 rounded-full shadow-lg text-xs sm:text-sm font-medium flex items-center gap-2">
+    <span>🌿</span>
+    <span id="toast-message">แจ้งเตือน</span>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
